@@ -1789,8 +1789,8 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 				{
 					$actions_urls[$unique_id] =
 					$action->url_has_http ?
-					 $this->http_link_url($action, $row) :
-						$this->no_http_link_url($action, $row);
+					 $this->http_link_url($action, $row,$primary_key) :
+						$this->no_http_link_url($action, $row,$primary_key);
 				}
 			}
 			$row->action_urls = $actions_urls;
@@ -1799,7 +1799,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		return $list;
 	}
 
-	private function http_link_url($action, $row)
+	private function http_link_url($action, $row,$primary_key)
 	{
 		//$composite_keys
 		if(property_exists($action, "composite_keys"))
@@ -1810,7 +1810,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 			return $action->link_url.$row->$primary_key;
 	}
 
-	private function no_http_link_url($action, $row)
+	private function no_http_link_url($action, $row, $primary_key)
 	{
 		if(property_exists($action, "composite_keys"))
 		{
