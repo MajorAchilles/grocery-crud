@@ -1804,7 +1804,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		//$composite_keys
 		if(property_exists($action, "composite_keys"))
 		{
-			return get_url_stub($action);
+			return $this->get_url_stub($action);
 		}
 		else
 			return $action->link_url.$row->$primary_key;
@@ -1814,7 +1814,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 	{
 		if(property_exists($action, "composite_keys"))
 		{
-			return get_url_stub($action);
+			return $this->get_url_stub($action);
 		}
 		else
 			return site_url($action->link_url.'/'.$row->$primary_key);
