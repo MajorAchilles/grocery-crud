@@ -1789,8 +1789,8 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 				{
 					$actions_urls[$unique_id] =
 					$action->url_has_http ?
-					 $this->http_link_url($action) :
-						$this->no_http_link_url($action);
+					 $this->http_link_url($action, $row) :
+						$this->no_http_link_url($action, $row);
 				}
 			}
 			$row->action_urls = $actions_urls;
@@ -1799,28 +1799,28 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		return $list;
 	}
 
-	private function http_link_url($action)
+	private function http_link_url($action, $row)
 	{
 		//$composite_keys
 		if(property_exists($action, "composite_keys"))
 		{
-			return $this->get_url_stub($action);
+			return $this->get_url_stub($action, $row);
 		}
 		else
 			return $action->link_url.$row->$primary_key;
 	}
 
-	private function no_http_link_url($action)
+	private function no_http_link_url($action, $row)
 	{
 		if(property_exists($action, "composite_keys"))
 		{
-			return $this->get_url_stub($action);
+			return $this->get_url_stub($action, $row);
 		}
 		else
 			return site_url($action->link_url.'/'.$row->$primary_key);
 	}
 
-	private function get_url_stub($action)
+	private function get_url_stub($action, $row)
 	{
 			$var = $action->link_url;
 			$row_array = (array) $row;
